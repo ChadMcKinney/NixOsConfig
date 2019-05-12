@@ -329,11 +329,22 @@ let g:lightline = { 'colorscheme' : 'onedark', }
 " Set font on start
 " set guifont="Meslo LG S DZ for Powerline:h11
 "
-"
+
+" -----------------------
+" Chromatica
+
+" Not really sure what this should be set to on nixos yet :(
+let g:chromatica#libclang_path="${clang-unwrapped.lib}/lib"
+let g:chromatica#enable_at_startup=1
+
+
+" -----------------------
+" Filetype commands
+
 " Set the filetype based on the file's extension, overriding any
 " 'filetype' that has already been set
 au BufRead,BufNewFile *.necro set filetype=haskell
 
-" Filetype commands
 autocmd FileType haskell :packadd haskell-vim
-
+autocmd FileType c :packadd c-vim
+autocmd FileType cpp :packadd cpp-vim

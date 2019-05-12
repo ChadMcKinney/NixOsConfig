@@ -57,5 +57,32 @@ in {
 		};
 		dependencies = [];
 	};
+	"c-vim" = buildVimPlugin {
+		name = "c-vim";
+		src = fetchgit {
+			url = "https://github.com/vim-jp/vim-cpp.git";
+			rev = "1ddd7e39567d847526b806bd28fede509a505e6c";
+			sha256 = "1782jbff2h3zbp7dilprbrchi0qpj5xdgpb8bb4b6z741v4fh8p3";
+		};
+		dependencies = [ ];
+	};
+	"cpp-enhanced-highlight" = buildVimPlugin {
+		name = "cpp-enhanced-highlight";
+		src = fetchgit {
+			url = "https://github.com/octol/vim-cpp-enhanced-highlight.git";
+			rev = "3aa95627380501d9ce77eb8ff5dcf889d0d0ac41";
+			sha256 = "15vsmqlpsxq0wjz5yq1kmnghv159842zsv88ylmjw6arvb11zmic";
+		};
+		dependencies = [ ];
+	};
+	"chromatica" = buildVimPlugin {
+		name = "chromatica";
+		src = fetchgit {
+			url = "https://github.com/arakashic/chromatica.nvim.git";
+			rev = "024cf1e8e8bb282eb47fe1c47892947363aa9c67";
+			sha256 = "12x0012qi6q6hhgqarm7gn5gv9ksn44hdy1k7m4kd7a7mgi64pry";
+		};
+		dependencies = [ pkgs.llvmPackages.clang-unwrapped ];
+	};
 }
 
