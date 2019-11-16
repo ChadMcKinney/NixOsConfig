@@ -45,7 +45,7 @@
     ccls
     networkmanager
     firefox
-    skypeforlinux
+    # skypeforlinux # -> busted on latest right now :(
     git
     nasm
     thunderbird

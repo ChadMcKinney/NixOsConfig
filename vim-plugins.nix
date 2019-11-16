@@ -167,8 +167,8 @@ in {
 
       src = fetchgit {
         url = "https://github.com/neoclide/coc.nvim.git";
-        rev = "v${version}";
-        sha256 = "00zvldr57yd3bxrgiwm8w38fip0fnnhgh6ldvkrcl15pxpz0mrwq";
+        rev = "dcd602ce1bc64e909ad19f057c868717bb429380";
+        sha256 = "0412q50sf5biliakqqi5srd9piqca5ij76vyic4zl0s2lw64y16w";
       };
 
       deps = yarn2nix.mkYarnModules rec {
