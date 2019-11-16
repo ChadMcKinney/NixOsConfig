@@ -1,6 +1,7 @@
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 scriptencoding utf-8
 set encoding=utf-8
+set shell=/bin/sh 
 
 "------------------------
 "VIMPLUG
@@ -80,14 +81,16 @@ set clipboard=unnamed,unnamedplus
 "Never type the same word twice and maybe learn a new spellings!
 "Use the Linux dictionary when spelling is in doubt.
 "Window users can copy the file to their machine.
-function! Tab_Or_Complete()
-  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-    return "\<C-N>"
-  else
-    return "\<Tab>"
-  endif
-endfunction
-:inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
+" function! Tab_Or_Complete()
+"   if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+"     return "\<C-N>"
+"   else
+"     return "\<Tab>"
+"   endif
+" endfunction
+" :inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
 :set dictionary="/usr/dict/words"
 :set noswapfile
 
@@ -102,9 +105,13 @@ let g:indentLine_char = '│'
 " ,tab:>-,trail:~,extends:>,precedes:<
 
 " let g:cpp_experimental_template_highlight = 1
-let g:cpp_class_scope_highlight = 1
+" let g:cpp_class_scope_highlight = 1
 
-"------------------------
+" let g:LanguageClient_serverCommands = {
+"     \ 'c': ['cquery'],
+"     \ }
+
+" "------------------------
 " Haskell
 "------------------------
 let g:haskell_indent_if    = 4
@@ -331,12 +338,100 @@ let g:lightline = { 'colorscheme' : 'onedark', }
 "
 
 " -----------------------
+" You Complete Me
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_server_use_vim_stdout = 0
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+
+" -----------------------
 " Chromatica
 
-" Not really sure what this should be set to on nixos yet :(
-let g:chromatica#libclang_path="${clang-unwrapped.lib}/lib"
-let g:chromatica#enable_at_startup=1
+" let g:chromatica#libclang_path="CLANG_UNWRAPPED"
+" let g:chromatica#enable_at_startup=1
+" let g:chromatica#search_source_args=1
+"
+" let g:chromatica#dotclangfile_search_path = "./result/compile_commands.json"
 
+" -----------------------
+" cxxd
+
+g:cxxd_compilation_db_discovery_dir_paths="~/Source/Necronomicon/result/compile_commands.json"
+
+" -----------------------
+" vim-lsp-cxx-highlight
+
+
+" Configuration of vim-lsp to use cquery and ccls with vim-lsp
+
+" also see https://github.com/prabirshrestha/vim-lsp/wiki/Servers-cquery
+"
+" cquery always requires these options
+" highlight.enabled = true
+" emitInactiveRegions = true
+if executable('cquery')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': {
+      \   'cacheDirectory': '/path/to/cquery/cache',
+      \   'highlight': { 'enabled' : v:true },
+      \   'emitInactiveRegions': v:true
+      \ },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+endif
+
+" let g:lsp_cxx_hl_use_text_props = 1
+
+    " cquery
+    " also see https://github.com/autozimu/LanguageClient-neovim/wiki/cquery
+    let s:cquery_settings = {
+            \ 'cacheDirectory': '/var/cquery/',
+            \ 'emitInactiveRegions': v:true,
+            \ 'highlight': { 'enabled' : v:true },
+            \ }
+
+    let s:cquery_command = ['cquery', '-init=' . json_encode(s:cquery_settings)]
+
+    let g:LanguageClient_serverCommands = {
+        \ 'c': s:cquery_command,
+        \ 'cpp': s:cquery_command,
+        \ 'objc': s:cquery_command,
+    \ }
+
+
+" -----------------------
+" coc.nvim
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Remap keys for gotos
+  " nmap <silent> gd :call CocAction('jumpDefinition', 'tab drop')<CR>
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+
+" -----------------------
+" Clamp
+
+" let g:clamp_libclang_file = "CLANG_UNWRAPPED"
+" let g:clamp_autostart = 1
 
 " -----------------------
 " Filetype commands
@@ -346,5 +441,5 @@ let g:chromatica#enable_at_startup=1
 au BufRead,BufNewFile *.necro set filetype=haskell
 
 autocmd FileType haskell :packadd haskell-vim
-autocmd FileType c :packadd c-vim
-autocmd FileType cpp :packadd cpp-vim
+" autocmd FileType c :packadd c-vim
+" autocmd FileType cpp :packadd cpp-vim

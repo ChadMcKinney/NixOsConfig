@@ -39,7 +39,10 @@
 
   environment.systemPackages = with pkgs; [
     wget
+    file
     fzf
+    cquery
+    ccls
     networkmanager
     firefox
     skypeforlinux
@@ -53,6 +56,15 @@
     vimPlugins.vim-plug
     nix-prefetch-git
     powerline-fonts
+    gdb
+    valgrind
+    gnome3.nemiver
+    qtcreator
+    dos2unix
+    python37
+    bear
+    xorg.libX11
+    nodejs
   ];
 
   nixpkgs.config.firefox.enableBrowserpass = true; 

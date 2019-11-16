@@ -1,17 +1,26 @@
-{ pkgs, fetchgit }:
+{ pkgs, vimUtils, fetchgit }:
+
+with vimUtils;
 
 let
 	buildVimPlugin = pkgs.vimUtils.buildVimPluginFrom2Nix;
+    yarn2nix = pkgs.callPackage (pkgs.fetchFromGitHub {
+        owner = "moretea";
+        repo = "yarn2nix";
+        rev = "780e33a07fd821e09ab5b05223ddb4ca15ac663f";
+        sha256 = "1f83cr9qgk95g3571ps644rvgfzv2i4i7532q8pg405s4q5ada3h";
+        }) {};
 in {
-	"tcomment" = buildVimPlugin {
-		name = "tcomment";
-		src = fetchgit {
-			url = "https://github.com/tomtom/tcomment_vim.git";
-			rev = "622cc0551bef87a3dfb2846cb339412eeb8ef133";
-			sha256 = "0zd23520hn5lflcz2jpi22x13kvmy6ry7qqzbi438xyw4j4gwpfs";
-		};
-		dependencies = [];
-	};
+  "tcomment" = buildVimPlugin {
+    name = "tcomment";
+    src = fetchgit {
+      url = "https://github.com/tomtom/tcomment_vim.git";
+      rev = "622cc0551bef87a3dfb2846cb339412eeb8ef133";
+      sha256 = "0zd23520hn5lflcz2jpi22x13kvmy6ry7qqzbi438xyw4j4gwpfs";
+    };
+    dependencies = [];
+  };
+
 	"onedark" = buildVimPlugin {
 		name = "onedark";
 		src = fetchgit {
@@ -21,6 +30,7 @@ in {
 		};
 		dependencies = [];
 	};
+
 	"one" = buildVimPlugin {
 		name = "one";
 		src = fetchgit {
@@ -30,6 +40,7 @@ in {
 		};
 		dependencies = [];
 	};
+
 	"onehalf" = buildVimPlugin {
 		name = "onehalf";
 		src = fetchgit {
@@ -39,6 +50,7 @@ in {
 		};
 		dependencies = [];
 	};
+
 	"flygrep" = buildVimPlugin {
 		name = "flygrep";
 		src = fetchgit {
@@ -48,6 +60,7 @@ in {
 		};
 		dependencies = [];
 	};
+
 	"indentline" = buildVimPlugin {
 		name = "indentline";
 		src = fetchgit {
@@ -57,6 +70,7 @@ in {
 		};
 		dependencies = [];
 	};
+
 	"c-vim" = buildVimPlugin {
 		name = "c-vim";
 		src = fetchgit {
@@ -66,6 +80,7 @@ in {
 		};
 		dependencies = [ ];
 	};
+
 	"cpp-enhanced-highlight" = buildVimPlugin {
 		name = "cpp-enhanced-highlight";
 		src = fetchgit {
@@ -75,6 +90,7 @@ in {
 		};
 		dependencies = [ ];
 	};
+
 	"chromatica" = buildVimPlugin {
 		name = "chromatica";
 		src = fetchgit {
@@ -82,7 +98,105 @@ in {
 			rev = "024cf1e8e8bb282eb47fe1c47892947363aa9c67";
 			sha256 = "12x0012qi6q6hhgqarm7gn5gv9ksn44hdy1k7m4kd7a7mgi64pry";
 		};
-		dependencies = [ pkgs.llvmPackages.clang-unwrapped ];
+		dependencies = [ pkgs.llvm pkgs.llvmPackages.clang-unwrapped pkgs.python37 pkgs.python37Packages.pynvim ];
 	};
-}
 
+	"DyeVim" = buildVimPlugin {
+		name = "DyeVim";
+		src = fetchgit {
+			url = "https://github.com/davits/DyeVim.git";
+			rev = "b915e4ddc3d9b4b5365ce264ce1e7c1b13281915";
+			sha256 = "0s35l13qdr1hkc3yxrrj8x13fp7rj97qqibmd103dsilz4jspdif";
+		};
+		dependencies = [ pkgs.vimPlugins.YouCompleteMe ];
+	};
+
+	"color_coded" = buildVimPlugin {
+		name = "color_coded";
+		src = fetchgit {
+			url = "https://github.com/jeaye/color_coded.git";
+			rev = "16e71d6f5850849c6ffc9a06a7c952e27d351866";
+			sha256 = "0cvh9r4j8177z3sqvbk15dylj76r3qfz1z5qhar3rg42b7hhir5l";
+		};
+		dependencies = [ pkgs.llvm pkgs.llvmPackages.clang-unwrapped pkgs.ncurses pkgs.zlib pkgs.xz pkgs.lua ];
+	};
+
+	"clamp" = buildVimPlugin {
+		name = "clamp";
+		src = fetchgit {
+			url = "https://github.com/bbchung/Clamp.git";
+			rev = "ae4b8663ce69378a5d42f44f51ee2ac06920faf2";
+			sha256 = "0mvvgrwrp09qai8vq3mzrmicxd8h0f47zzsxvm6kpxqfy8i38n04";
+		};
+		dependencies = [ pkgs.llvm pkgs.llvmPackages.clang-unwrapped pkgs.python37Packages.pynvim pkgs.python37 ];
+	};
+
+	"vim_lsp_cxx_highlight" = buildVimPlugin {
+		name = "vim_lsp_cxx_highlight";
+		src = fetchgit {
+			url = "https://github.com/jackguo380/vim-lsp-cxx-highlight";
+			rev = "4df127d606f61a3701df73b1b72be0245621c325";
+			sha256 = "08a2i717ifgqfn7ri2ciskfhykxzqg631864n213b6p6yhhpmfnj";
+		};
+		dependencies = [ pkgs.vimPlugins.LanguageClient-neovim pkgs.cquery pkgs.ccls ];
+	};
+
+	"cxxd" = buildVimPlugin {
+		name = "cxxd";
+		src = fetchgit {
+			url = "https://github.com/JBakamovic/cxxd.git";
+			rev = "06d2743cb11fb4c89e69314f60b7e599e2040aef";
+			sha256 = "18f0kyixg2yj53yw5imq4ldrv7fdilykdrsrx8i3b1rpbp5z0fns";
+		};
+		dependencies = [ pkgs.llvm pkgs.llvmPackages.clang-unwrapped pkgs.python27Packages.pynvim pkgs.python27 pkgs.clang-tools ];
+	};
+
+	"cxxd-vim" = buildVimPlugin {
+		name = "cxxd-vim";
+		src = fetchgit {
+			url = "https://github.com/JBakamovic/cxxd-vim.git";
+			rev = "38049ac503352abbb17506ce47f3075bc5944fd3";
+			sha256 = "0l5qmqzqlicribmfbr3nriqzk39zf80a81hds35xpv8f60767gx0";
+		};
+		dependencies = [ pkgs.llvm pkgs.llvmPackages.clang-unwrapped pkgs.python27Packages.pynvim pkgs.python27 pkgs.clang-tools ];
+	};
+
+    "coc-nvim" = let
+      pname = "coc.nvim";
+      version = "0.0.74";
+
+      src = fetchgit {
+        url = "https://github.com/neoclide/coc.nvim.git";
+        rev = "v${version}";
+        sha256 = "00zvldr57yd3bxrgiwm8w38fip0fnnhgh6ldvkrcl15pxpz0mrwq";
+      };
+
+      deps = yarn2nix.mkYarnModules rec {
+        inherit version pname;
+        name = "${pname}-modules-${version}";
+        packageJSON = src + "/package.json";
+        yarnLock = src + "/yarn.lock";
+      };
+
+      in buildVimPluginFrom2Nix {
+        inherit version pname src;
+		dependencies = [ pkgs.nodejs ];
+
+        configurePhase = ''
+          mkdir -p node_modules
+          ln -s ${deps}/node_modules/* node_modules/
+          ln -s ${deps}/node_modules/.bin node_modules/
+          '';
+
+        buildPhase = ''
+          ${pkgs.yarn}/bin/yarn build
+          '';
+
+        postFixup = ''
+          substituteInPlace $target/autoload/coc/util.vim \
+          --replace "'yarnpkg'" "'${pkgs.yarn}/bin/yarnpkg'"
+          substituteInPlace $target/autoload/health/coc.vim \
+          --replace "'yarnpkg'" "'${pkgs.yarn}/bin/yarnpkg'"
+          '';
+      };
+}
