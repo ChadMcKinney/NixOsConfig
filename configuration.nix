@@ -37,6 +37,13 @@
 
   networking.networkmanager.enable = true;
 
+  environment.enableDebugInfo = true;
+  nixpkgs.config.packageOverrides = pkgs: {
+    llvm = pkgs.llvm.overrideAttrs (attrs: {
+        separateDebugInfo = true;
+        });
+      };
+
   environment.systemPackages = with pkgs; [
     wget
     file
@@ -65,6 +72,9 @@
     bear
     xorg.libX11
     nodejs
+    playonlinux
+    llvm
+    gnuplot
   ];
 
   nixpkgs.config.firefox.enableBrowserpass = true; 
@@ -90,6 +100,7 @@
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.support32Bit = true;
   hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.extraPackages = with pkgs; [ pkgs.pkgsi686Linux.libva ]; # steam support
 
   # Gnome 3
   services.xserver.enable = true;
@@ -110,6 +121,9 @@
     packages = [
       pkgs.steam
       pkgs.steam-run
+      pkgs.steam-run-native
+      pkgs.linux-steam-integration
+      pkgs.pkgsi686Linux.libva
       pkgs.spotify
       pkgs.wine
       pkgs.wineFull
@@ -120,6 +134,6 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.03"; # Did you read the comment?
+  system.stateVersion = "19.09"; # Did you read the comment?
 
 }
