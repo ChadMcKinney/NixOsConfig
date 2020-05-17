@@ -10,6 +10,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      /home/octopiansociety/Source/libraries/musnix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -75,6 +76,8 @@
     playonlinux
     llvm
     gnuplot
+    clang
+    gcc
   ];
 
   nixpkgs.config.firefox.enableBrowserpass = true; 
@@ -115,9 +118,12 @@
     fi
   '';
 
+  # real-time audio nix configuration
+  musnix.enable = true;
+
   users.users.octopiansociety = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" ];
     packages = [
       pkgs.steam
       pkgs.steam-run
@@ -127,6 +133,13 @@
       pkgs.spotify
       pkgs.wine
       pkgs.wineFull
+      pkgs.qjackctl
+      pkgs.jack2Full
+      pkgs.portaudio
+      pkgs.filezilla
+      pkgs.latex2html
+      pkgs.texlive.combined.scheme-full 
+      pkgs.gimp
     ];
   };
 
