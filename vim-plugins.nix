@@ -21,6 +21,46 @@ in {
     dependencies = [];
   };
 
+	"miramare" = buildVimPlugin {
+		name = "miramare";
+		src = fetchgit {
+			url = "https://github.com/franbach/miramare.git";
+			rev = "89643afaa8c4f2cdc62e0d16083ed876ad01a945";
+			sha256 = "1q6gn6cj8nbvp0l7d6fhpi60mmmpl2kpkln9lq16yq6xnkwi2jk9";
+		};
+		dependencies = [];
+	};
+
+	"polyglot" = buildVimPlugin {
+		name = "polyglot";
+		src = fetchgit {
+			url = "https://github.com/sheerun/vim-polyglot.git";
+			rev = "9c3c0bc082e0d58d15dc6f24d8a335931417e2f0";
+			sha256 = "0pdfq512qh54zj24iwihr30xb8dxw67ix2yj0sb88qy07phab8k2";
+		};
+		dependencies = [];
+	};
+
+	"haskellSyntax" = buildVimPlugin {
+		name = "haskellSyntax";
+		src = fetchgit {
+			url = "https://github.com/ChadMcKinney/haskell_syntax.vim.git";
+			rev = "c4d1d372529a0f24650f00fc5a4a57bf05da6e38";
+			sha256 = "1xr0m38if8ss7zvsnhjjlwlf89mbf2kbwbs58g38jvd9bdcaky16";
+		};
+		dependencies = [];
+	};
+
+	"solarized" = buildVimPlugin {
+		name = "solarized";
+		src = fetchgit {
+			url = "https://github.com/lifepillar/vim-solarized8.git";
+			rev = "5df7666374ead07a482605b53a0f36c27dc17e8d";
+			sha256 = "1nvlb00lajzbhfsbsjw6f7hi37xrnyfhf0a7cgjvf3jp2piwjs2d";
+		};
+		dependencies = [];
+	};
+
 	"onedark" = buildVimPlugin {
 		name = "onedark";
 		src = fetchgit {

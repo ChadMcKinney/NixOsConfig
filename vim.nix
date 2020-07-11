@@ -25,11 +25,17 @@ in
             plugins.tcomment 
             plugins.one
             plugins.onedark
+            plugins.solarized
             plugins.flygrep
             plugins.indentline
             plugins.coc-nvim
+            plugins.miramare
+            plugins.polyglot
         ];
-        opt = [ haskell-vim ];
+        opt = [
+          plugins.haskellSyntax
+          haskell-vim
+        ];
       };
     };
   }

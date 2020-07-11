@@ -125,14 +125,14 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" ];
     packages = [
-      pkgs.steam
-      pkgs.steam-run
-      pkgs.steam-run-native
-      pkgs.linux-steam-integration
+      # pkgs.steam
+      # pkgs.steam-run
+      # pkgs.steam-run-native
+      # pkgs.linux-steam-integration
       pkgs.pkgsi686Linux.libva
       pkgs.spotify
-      pkgs.wine
-      pkgs.wineFull
+      # pkgs.wine
+      # pkgs.wineFull
       pkgs.qjackctl
       pkgs.jack2Full
       pkgs.portaudio
@@ -140,6 +140,11 @@
       pkgs.latex2html
       pkgs.texlive.combined.scheme-full 
       pkgs.gimp
+      pkgs.ifuse
+      pkgs.p7zip
+      pkgs.audacity
+      pkgs.ardour
+      pkgs.killall
     ];
   };
 

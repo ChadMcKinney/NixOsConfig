@@ -41,14 +41,14 @@ set shell=/bin/sh
 "Change leader key to space!
 let mapleader=" "
 
-set tabstop=4       " The width of a TAB is set to 4.
+set tabstop=2       " The width of a TAB is set to 4.
                     " Still it is a \t. It is just that
                     " Vim will interpret it to be having
                     " a width of 4.
 
-set shiftwidth=4    " Indents will have a width of 4
+set shiftwidth=2    " Indents will have a width of 4
 
-set softtabstop=4   " Sets the number of columns for a TAB
+set softtabstop=2   " Sets the number of columns for a TAB
 set expandtab
 set shiftround
 syntax enable
@@ -148,6 +148,9 @@ nnoremap <C-h> :bprevious<CR>
 map <C-k> {
 map <C-j> }
 
+" Necronomicon execution
+nnoremap <F5> :!cd ~/Source/Necronomicon && ~/Source/Necronomicon/result/build/necro %:p -jit -opt <CR>
+
 :set wildignore+=*uasset,*.o,*.obj,*.meta,*.mat,*.hi,*.jpg,*.png,*.psd,*.controller,*.fbx,*.anim,*.unity,*.db,*.pdf,*.prefab,*.tif,**/.git/*,**/.svn/*,*.tga,*.dll,*.sln,*.zip,*.lnk,*.assets,*.bmp,*.TTF,*.apk,*.wavm,*.lib,*.dyn_hi,*.dyn_o,**/dist
 :set ic
 
@@ -198,7 +201,7 @@ nnoremap <LEADER>l :wincmd l<CR>
 " colorscheme jellybeans
 " let g:molokai_original = 1
 " let g:rehash256 = 1
-" colorscheme molokai
+colorscheme molokai
 " " let g:molokai_original = 1
 " colorscheme jellybeans
 " colorscheme wolfpack
@@ -208,7 +211,7 @@ nnoremap <LEADER>l :wincmd l<CR>
 " :set cursorline
 " colorscheme dracula
 " colorscheme onedark
-colorscheme one
+" colorscheme one
 " colorscheme onehalfdark
 
 " Make custom colorscheme?
@@ -282,8 +285,9 @@ endif
 "--------------------------------------
 " Lightline
 "--------------------------------------
-let g:lightline = { 'colorscheme' : 'onedark', }
+" let g:lightline = { 'colorscheme' : 'onedark', }
 " let g:lightline.colorscheme = 'onedark'
+let g:lightline = { 'colorscheme' : 'molokai', }
 
 " let g:lightline = {
 "         \ 'colorscheme' : 'onedark',
@@ -307,7 +311,7 @@ let g:lightline = { 'colorscheme' : 'onedark', }
 " 		endif
 " 		return ''
 " endfunction
-"
+
 " let g:lightline = {
 "         \ 'colorscheme' : 'onedark',
 " 		\ 'component': {
@@ -438,8 +442,9 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Set the filetype based on the file's extension, overriding any
 " 'filetype' that has already been set
-au BufRead,BufNewFile *.necro set filetype=haskell
 
 autocmd FileType haskell :packadd haskell-vim
+autocmd FileType haskell :packadd haskellSyntax
+au BufRead,BufNewFile *.necro set filetype=elm
 " autocmd FileType c :packadd c-vim
 " autocmd FileType cpp :packadd cpp-vim
