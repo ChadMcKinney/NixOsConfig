@@ -72,8 +72,8 @@
     python37
     bear
     xorg.libX11
-    nodejs
-    playonlinux
+    # nodejs
+    # playonlinux
     llvm
     gnuplot
     clang
@@ -144,7 +144,25 @@
       pkgs.p7zip
       pkgs.audacity
       pkgs.ardour
+      pkgs.zam-plugins
+      pkgs.lsp-plugins
+      pkgs.eq10q
+      pkgs.x42-plugins
+      pkgs.lv2
+      pkgs.ams-lv2
+      pkgs.artyFX
+      pkgs.gxplugins-lv2
+      pkgs.infamousPlugins
       pkgs.killall
+      pkgs.musescore
+      # pkgs.linuxsampler
+      # pkgs.qsampler
+      pkgs.blender
+      pkgs.libreoffice
+      pkgs.p4v
+      pkgs.openssl_1_0_2
+      pkgs.inkscape
+      pkgs.poppler_utils
     ];
   };
 
