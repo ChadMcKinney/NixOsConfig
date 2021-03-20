@@ -144,6 +144,8 @@
       pkgs.p7zip
       pkgs.audacity
       pkgs.ardour
+      pkgs.distrho
+      pkgs.ladspaPlugins
       pkgs.zam-plugins
       pkgs.lsp-plugins
       pkgs.eq10q
@@ -153,6 +155,7 @@
       pkgs.artyFX
       pkgs.gxplugins-lv2
       pkgs.infamousPlugins
+      pkgs.lilv
       pkgs.killall
       pkgs.musescore
       # pkgs.linuxsampler
