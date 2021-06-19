@@ -72,12 +72,13 @@
     python37
     bear
     xorg.libX11
-    # nodejs
+    nodejs
     # playonlinux
     llvm
     gnuplot
     clang
     gcc
+    unrar
   ];
 
   nixpkgs.config.firefox.enableBrowserpass = true; 
@@ -136,6 +137,7 @@
       pkgs.qjackctl
       pkgs.jack2Full
       pkgs.portaudio
+      pkgs.portmidi
       pkgs.filezilla
       pkgs.latex2html
       pkgs.texlive.combined.scheme-full 
@@ -158,14 +160,15 @@
       pkgs.lilv
       pkgs.killall
       pkgs.musescore
-      # pkgs.linuxsampler
-      # pkgs.qsampler
+      pkgs.linuxsampler
+      pkgs.qsampler
       pkgs.blender
       pkgs.libreoffice
       pkgs.p4v
       pkgs.openssl_1_0_2
       pkgs.inkscape
       pkgs.poppler_utils
+      pkgs.cmakeCurses
     ];
   };
 
