@@ -21,7 +21,7 @@ in
             python27Packages.pyopenssl
             python37Packages.pyopenssl
             molokai
-            plugins.vim_lsp_cxx_highlight
+            # plugins.vim_lsp_cxx_highlight
             plugins.tcomment 
             plugins.one
             plugins.onedark

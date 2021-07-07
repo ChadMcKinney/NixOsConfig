@@ -171,15 +171,15 @@ in {
 		dependencies = [ pkgs.llvm pkgs.llvmPackages.clang-unwrapped pkgs.python37Packages.pynvim pkgs.python37 ];
 	};
 
-	"vim_lsp_cxx_highlight" = buildVimPlugin {
-		name = "vim_lsp_cxx_highlight";
-		src = fetchgit {
-			url = "https://github.com/jackguo380/vim-lsp-cxx-highlight";
-			rev = "4df127d606f61a3701df73b1b72be0245621c325";
-			sha256 = "08a2i717ifgqfn7ri2ciskfhykxzqg631864n213b6p6yhhpmfnj";
-		};
-		dependencies = [ pkgs.vimPlugins.LanguageClient-neovim pkgs.cquery pkgs.ccls ];
-	};
+	# "vim_lsp_cxx_highlight" = buildVimPlugin {
+	# 	name = "vim_lsp_cxx_highlight";
+	# 	src = fetchgit {
+	# 		url = "https://github.com/jackguo380/vim-lsp-cxx-highlight";
+	# 		rev = "4df127d606f61a3701df73b1b72be0245621c325";
+	# 		sha256 = "08a2i717ifgqfn7ri2ciskfhykxzqg631864n213b6p6yhhpmfnj";
+	# 	};
+	# 	dependencies = [ pkgs.vimPlugins.LanguageClient-neovim pkgs.cquery pkgs.ccls ];
+	# };
 
 	"cxxd" = buildVimPlugin {
 		name = "cxxd";

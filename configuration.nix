@@ -49,7 +49,7 @@
     wget
     file
     fzf
-    cquery
+    # cquery
     ccls
     networkmanager
     firefox
@@ -66,7 +66,7 @@
     powerline-fonts
     gdb
     valgrind
-    gnome3.nemiver
+    gnome.nemiver
     qtcreator
     dos2unix
     python37
@@ -79,7 +79,15 @@
     clang
     gcc
     unrar
+    zlib
+    hunspell
+    hunspellDicts.en_US-large
+    hyphen
   ];
+
+  # Needed for LibreOffice spell check
+  environment.pathsToLink = [ "/share/hunspell" "/share/myspell" "/share/hyphen" ];
+  environment.variables.DICPATH = "/run/current-system/sw/share/hunspell:/run/current-system/sw/share/hyphen";
 
   nixpkgs.config.firefox.enableBrowserpass = true; 
   nixpkgs.config.firefox.enableGnomeExtensions = true; 
@@ -106,16 +114,16 @@
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages = with pkgs; [ pkgs.pkgsi686Linux.libva ]; # steam support
 
-  # Gnome 3
+  # # Gnome 3
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = false;
-  services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   #new tabs in gnome terminal open in same directory
   environment.interactiveShellInit = ''
     if [[ "$VTE_VERSION" > 3405 ]]; then
-      source "${pkgs.gnome3.vte}/etc/profile.d/vte.sh"
+      source "${pkgs.gnome.vte}/etc/profile.d/vte.sh"
     fi
   '';
 
@@ -165,7 +173,7 @@
       pkgs.blender
       pkgs.libreoffice
       pkgs.p4v
-      pkgs.openssl_1_0_2
+      pkgs.openssl
       pkgs.inkscape
       pkgs.poppler_utils
       pkgs.cmakeCurses
